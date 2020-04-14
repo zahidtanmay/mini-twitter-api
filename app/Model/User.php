@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -18,7 +18,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'first_name',
+        'last_name',
+        'email'
     ];
 
     /**
@@ -29,4 +31,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function posts(){
+        return $this->hasMany('App\Model\Post');
+    }
+
+    public function followers(){
+        return $this->hasMany('App\Model\Follower');
+    }
+
+    public function following(){
+        return $this->belongsTo('App\Model\Follower');
+    }
 }
