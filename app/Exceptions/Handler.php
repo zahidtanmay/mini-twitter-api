@@ -84,7 +84,7 @@ class Handler extends ExceptionHandler
 
             case 'ValidationException':
                 $status = Response::HTTP_BAD_REQUEST;
-                $message = "Wrong or invalid paramter provided";
+                $message = $e->getResponse()->original ?? "Wrong or invalid paramter provided";
                 break;
 
             case 'InvalidArgumentException':

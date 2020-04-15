@@ -20,7 +20,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = [
         'first_name',
         'last_name',
-        'email'
+        'email',
+        'password'
     ];
 
     /**
@@ -29,7 +30,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password','deleted_at'
     ];
 
     public function posts(){
