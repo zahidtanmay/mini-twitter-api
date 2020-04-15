@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserCreateRequest;
 use App\Repository\UserRepository;
 
 class UserController extends Controller
@@ -13,7 +13,7 @@ class UserController extends Controller
         $this->users = $users;
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserCreateRequest $request)
     {
         $request->validated();
         $this->users->create($request->all());
