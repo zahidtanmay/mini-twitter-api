@@ -12,11 +12,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -24,11 +19,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password','deleted_at'
     ];
@@ -37,11 +27,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\Models\Post');
     }
 
-    public function followers(){
-        return $this->hasMany('App\Models\Follower');
+    public function following() {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
 
-    public function following(){
-        return $this->belongsTo('App\Models\Follower');
+
+    public function followers() {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
 }

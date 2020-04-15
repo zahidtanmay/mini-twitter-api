@@ -15,7 +15,14 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix'=>'api'], function () use ($router){
+
+$router->group(['prefix' => 'api'], function () use ($router){
     $router->post('/users', 'UserController@store');
     $router->post('/auth/login', 'AuthController@authenticate');
+
+    $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
+        $router->get('/posts', 'PostController@index');
+        $router->get('/posts/{id}', 'PostController@show');
+        $router->get('/users/{id}', 'UserController@show');
+    });
 });

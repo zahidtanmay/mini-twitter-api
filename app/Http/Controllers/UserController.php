@@ -7,16 +7,20 @@ use App\Repository\UserRepository;
 class UserController extends Controller
 {
 
-    protected $users;
-    public function __construct(UserRepository $users)
+    protected $user;
+    public function __construct(UserRepository $user)
     {
-        $this->users = $users;
+        $this->user = $user;
+    }
+
+    public function show($id){
+        return $this->user->with(['posts', 'followers', 'following'])->find($id);
     }
 
     public function store(UserCreateRequest $request)
     {
         $request->validated();
-        $this->users->create($request->all());
+        $this->user->create($request->all());
         return response()->json(['status' => 'User created successfully'], 201);
     }
 }

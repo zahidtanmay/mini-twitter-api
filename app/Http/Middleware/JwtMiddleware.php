@@ -23,9 +23,12 @@ class JwtMiddleware
         $token = $request->get('token', $request->bearerToken());
 
         if(!$token) {
-            $request['auth'] = false;
-            return $next($request);
-//            return response()->json(['error' => 'Token not provided.'], 401);
+            if ($request->getMethod() === "GET" && $request->getPathInfo() === "/api/posts") {
+                $request['auth'] = false;
+                return $next($request);
+            } else {
+                return response()->json(['error' => 'Token not provided.'], 401);
+            }
         }
 
         try {
