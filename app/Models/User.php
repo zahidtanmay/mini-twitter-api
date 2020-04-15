@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -33,14 +33,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     public function posts(){
-        return $this->hasMany('App\Model\Post');
+        return $this->hasMany('App\Models\Post');
     }
 
     public function followers(){
-        return $this->hasMany('App\Model\Follower');
+        return $this->hasMany('App\Models\Follower');
     }
 
     public function following(){
-        return $this->belongsTo('App\Model\Follower');
+        return $this->belongsTo('App\Models\Follower');
     }
 }
