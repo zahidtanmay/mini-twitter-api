@@ -25,7 +25,7 @@ class FollowerController extends Controller
 
     public function delete($id)
     {
-       $this->followers->delete($id);
+        $this->followers->findOrFail($id)->delete();
         return response()->json(['status' => 'success', 'message' => 'Successfully Unfollow'], 202);
     }
 }

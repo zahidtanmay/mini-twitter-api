@@ -27,4 +27,10 @@ class PostController extends Controller
         $this->posts->create($request->all());
         return response()->json(['status' => 'success', 'message' => 'Post Created Successfully'], 201);
     }
+
+    public function delete($id)
+    {
+        $this->posts->findOrFail($id)->delete();
+        return response()->json(['status' => 'success', 'message' => 'Post Deleted Successfully'], 202);
+    }
 }

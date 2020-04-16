@@ -23,4 +23,10 @@ class CommentController extends Controller
         $this->comments->createComment($request->all(), $id);
         return response()->json(['status' => 'success', 'message' => 'Comment Created Successfully'], 201);
     }
+
+    public function delete($id)
+    {
+        $this->comments->findOrFail($id)->delete();
+        return response()->json(['status' => 'success', 'message' => 'Comment Deleted Successfully'], 202);
+    }
 }

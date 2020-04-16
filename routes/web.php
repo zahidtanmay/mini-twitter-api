@@ -25,7 +25,9 @@ $router->group(['prefix' => 'api'], function () use ($router){
         $router->get('/posts/{id}', 'PostController@show');
         $router->get('/users/{id}', 'UserController@show');
         $router->post('/posts', 'PostController@store');
+        $router->delete('/posts/{id}', 'PostController@delete');
         $router->post('/posts/{id}/comments', 'CommentController@store');
+        $router->delete('/comments/{id}', 'CommentController@delete');
         $router->post('/users/{followerId}/{followingId}', 'FollowerController@store');
         $router->delete('/users/unfollow/{id}', 'FollowerController@delete');
     });
