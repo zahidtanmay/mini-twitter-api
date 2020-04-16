@@ -19,8 +19,7 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        $request->validated();
         $this->user->create($request->all());
-        return response()->json(['status' => 'User created successfully'], 201);
+        return response()->json(['status' => 'success', 'message' => 'User Created Successfully'], 201);
     }
 }

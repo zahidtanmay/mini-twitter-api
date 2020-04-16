@@ -27,7 +27,7 @@ class JwtMiddleware
                 $request['auth'] = false;
                 return $next($request);
             } else {
-                return response()->json(['error' => 'Token not provided.'], 401);
+                throw new AuthException("Token not provided");
             }
         }
 

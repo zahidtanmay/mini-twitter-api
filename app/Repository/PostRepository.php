@@ -7,4 +7,10 @@ class PostRepository extends Repository
     {
         return 'App\Models\Post';
     }
+
+    public function create(array $data)
+    {
+        $data['user_id'] = app('request')->get('auth')->id;
+        return parent::create($data);
+    }
 }

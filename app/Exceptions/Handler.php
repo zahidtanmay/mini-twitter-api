@@ -84,7 +84,7 @@ class Handler extends ExceptionHandler
 
             case 'ValidationException':
                 $status = Response::HTTP_BAD_REQUEST;
-                $message = $e->getResponse()->original ?? "Wrong or invalid paramter provided";
+                $message = array_values($e->getResponse()->original) ?? "Wrong or invalid paramter provided";
                 break;
 
             case 'InvalidArgumentException':
@@ -94,16 +94,7 @@ class Handler extends ExceptionHandler
                 $message = $e->getMessage();
                 break;
 
-            case 'QueryException':
-                $status = Response::HTTP_INTERNAL_SERVER_ERROR;
-                $message = $debugMode ? $e->getMessage() : $message;
-                break;
-
             case 'AuthException':
-                $status = Response::HTTP_UNAUTHORIZED;
-                $message = $e->getMessage();
-                break;
-
             case 'ExpiredException':
                 $status = Response::HTTP_UNAUTHORIZED;
                 $message = $e->getMessage();
@@ -116,12 +107,11 @@ class Handler extends ExceptionHandler
 
             case 'ValidatorException':
                 $status = Response::HTTP_BAD_REQUEST;
-                $message = array_values(array_map(function($val){
-                        return app('translator')->trans($val[0]);
-                    }, $e->getMessageBag()->toArray())
+                $message = array_values(array_map(function($val){return app('translator')->trans($val[0]);}, $e->getMessage())
                 );
                 break;
 
+            case 'QueryException':
             default:
                 $status = Response::HTTP_INTERNAL_SERVER_ERROR;
                 $message = $debugMode ? $e->getMessage() : $message;
@@ -132,7 +122,7 @@ class Handler extends ExceptionHandler
             'error' => [
                 'status' => $status,
                 'type' => $exceptionClass,
-                'messages' => (array)$message
+                'messages' => (array) $message
             ]],
             $status
         );

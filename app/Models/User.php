@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     public function posts(){
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Post')->with('comments');
     }
 
     public function following() {

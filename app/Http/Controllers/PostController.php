@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\PostRepository;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -19,5 +20,11 @@ class PostController extends Controller
     public function show($id)
     {
         return $this->posts->with(['user', 'comments'])->find($id);
+    }
+
+    public function store(PostRequest $request)
+    {
+        $this->posts->create($request->all());
+        return response()->json(['status' => 'success', 'message' => 'Post Created Successfully'], 201);
     }
 }
