@@ -21,14 +21,23 @@ $router->group(['prefix' => 'api'], function () use ($router){
     $router->post('/auth/login', 'AuthController@authenticate');
 
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
-        $router->get('/posts', 'PostController@index');
-        $router->get('/posts/{id}', 'PostController@show');
-        $router->get('/users/{id}', 'UserController@show');
-        $router->post('/posts', 'PostController@store');
-        $router->delete('/posts/{id}', 'PostController@delete');
-        $router->post('/posts/{id}/comments', 'CommentController@store');
-        $router->delete('/comments/{id}', 'CommentController@delete');
-        $router->post('/users/{followerId}/{followingId}', 'FollowerController@store');
-        $router->delete('/users/unfollow/{id}', 'FollowerController@delete');
+
+        $router->group(['prefix' => '/users'], function () use ($router){
+            $router->get('/{id}', 'UserController@show');
+            $router->post('/{followerId}/{followingId}', 'FollowerController@store');
+            $router->delete('/unfollow/{id}', 'FollowerController@delete');
+        });
+
+        $router->group(['prefix' => '/posts'], function () use ($router) {
+            $router->get('/', 'PostController@index');
+            $router->post('/', 'PostController@store');
+            $router->get('/{id}', 'PostController@show');
+            $router->patch('/{id}', 'PostController@update');
+            $router->delete('/{id}', 'PostController@delete');
+            $router->post('/{id}/comments', 'CommentController@store');
+            $router->patch('/comments/{id}', 'CommentController@update');
+            $router->delete('/comments/{id}', 'CommentController@delete');
+        });
+
     });
 });

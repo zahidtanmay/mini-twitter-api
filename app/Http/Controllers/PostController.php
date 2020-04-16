@@ -28,6 +28,12 @@ class PostController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Post Created Successfully'], 201);
     }
 
+    public function update(PostRequest $request, $id)
+    {
+        $this->posts->findOrFail($id)->update(['content' => $request->get('content')]);
+        return response()->json(['status' => 'success', 'message' => 'Post Updated Successfully'], 202);
+    }
+
     public function delete($id)
     {
         $this->posts->findOrFail($id)->delete();

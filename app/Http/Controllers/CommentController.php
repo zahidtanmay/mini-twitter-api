@@ -24,6 +24,12 @@ class CommentController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Comment Created Successfully'], 201);
     }
 
+    public function update(CommentRequest $request, $id)
+    {
+        $this->comments->findOrFail($id)->update(['content' => $request->get('content')]);
+        return response()->json(['status' => 'success', 'message' => 'Comment Updated Successfully'], 202);
+    }
+
     public function delete($id)
     {
         $this->comments->findOrFail($id)->delete();
