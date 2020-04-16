@@ -26,5 +26,6 @@ $router->group(['prefix' => 'api'], function () use ($router){
         $router->get('/users/{id}', 'UserController@show');
         $router->post('/posts', 'PostController@store');
         $router->post('/posts/{id}/comments', 'CommentController@store');
+        $router->post('/users/{followerId}/{followingId}', 'FollowerController@store');
     });
 });
