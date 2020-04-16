@@ -11,7 +11,6 @@ abstract class Repository implements RepositoryInterface {
     private $app;
     protected $model;
 
-
     public function __construct(App $app) {
         $this->app = $app;
         $this->makeModel();
@@ -19,16 +18,13 @@ abstract class Repository implements RepositoryInterface {
 
     abstract function model();
 
-
     public function all($columns = array('*')) {
         return $this->model->get($columns);
     }
 
-
     public function paginate($perPage = 15, $columns = array('*')) {
         return $this->model->paginate($perPage, $columns);
     }
-
 
     public function create(array $data) {
         return $this->model->create($data);

@@ -18,9 +18,14 @@ class FollowerController extends Controller
 
     public function store($followerId, $followingId)
     {
-        $this->users->findOrFail($followerId);
-        $this->users->findOrFail($followingId);
+        $this->users->findOrFail([$followerId, $followingId]);
         $this->followers->createFollower($followerId, $followingId);
         return response()->json(['status' => 'success', 'message' => 'Follower Created Successfully'], 201);
+    }
+
+    public function delete($id)
+    {
+       $this->followers->delete($id);
+        return response()->json(['status' => 'success', 'message' => 'Successfully Unfollow'], 202);
     }
 }

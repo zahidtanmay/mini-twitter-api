@@ -12,6 +12,10 @@ class Comment extends Model
         'user_id'
     ];
 
+    protected $hidden = [
+        'deleted_at'
+    ];
+
     public function post() {
         return $this->belongsTo('App\Models\Post');
     }
