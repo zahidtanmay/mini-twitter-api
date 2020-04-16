@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        return $this->posts->with(['user', 'comments'])->find($id);
+        return $this->posts->with(['user', 'comments'])->findOrFail($id);
     }
 
     public function store(PostRequest $request)

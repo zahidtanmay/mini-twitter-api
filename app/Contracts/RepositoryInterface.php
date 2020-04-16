@@ -10,6 +10,8 @@ interface RepositoryInterface
 
     public function find($id, $columns = ['*']);
 
+    public function findOrFail($id, $columns = ['*']);
+
     public function findBy($field, $value, $columns = array('*'));
 
     public function create(array $attributes);

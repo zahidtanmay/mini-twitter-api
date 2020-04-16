@@ -46,6 +46,10 @@ abstract class Repository implements RepositoryInterface {
         return $this->model->find($id, $columns);
     }
 
+    public function findOrFail($id, $columns = array('*')) {
+        return $this->model->findOrFail($id, $columns);
+    }
+
     public function with(array $relations)
     {
         $this->model = $this->model->with($relations);
