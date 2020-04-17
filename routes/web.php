@@ -20,7 +20,7 @@ $router->group(['prefix' => 'api'], function () use ($router){
     $router->post('/users', 'UserController@store');
     $router->post('/auth/login', 'AuthController@authenticate');
 
-    $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
+    $router->group(['middleware' => ['jwt.auth']], function () use ($router) {
 
         $router->group(['prefix' => '/users'], function () use ($router){
             $router->get('/{id}', 'UserController@show');
@@ -32,11 +32,13 @@ $router->group(['prefix' => 'api'], function () use ($router){
             $router->get('/', 'PostController@index');
             $router->post('/', 'PostController@store');
             $router->get('/{id}', 'PostController@show');
-            $router->patch('/{id}', 'PostController@update');
-            $router->delete('/{id}', 'PostController@delete');
             $router->post('/{id}/comments', 'CommentController@store');
-            $router->patch('/comments/{id}', 'CommentController@update');
-            $router->delete('/comments/{id}', 'CommentController@delete');
+            $router->group(['middleware' => 'acl.auth'], function () use ($router){
+                $router->patch('/{id}', 'PostController@update');
+                $router->delete('/{id}', 'PostController@delete');
+                $router->patch('/comments/{id}', 'CommentController@update');
+                $router->delete('/comments/{id}', 'CommentController@delete');
+            });
         });
 
     });

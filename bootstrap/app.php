@@ -58,7 +58,7 @@ $app->singleton(
 */
 
 $app->configure('app');
-
+$app->configure('acl');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -76,6 +76,7 @@ $app->configure('app');
 
  $app->routeMiddleware([
      'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
+     'acl.auth' => App\Http\Middleware\AuthorizeMiddleWare::class,
 //     'auth' => App\Http\Middleware\Authenticate::class,
  ]);
 
