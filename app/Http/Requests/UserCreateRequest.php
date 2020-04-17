@@ -13,10 +13,10 @@ class UserCreateRequest extends RequestAbstract
     public function rules()
     {
         return [
-            "first_name" => "required",
-            "last_name" => "required",
-            "email" => "required",
-            "password" => "required"
+            "first_name" => "required|max:10",
+            "last_name" => "required|max:10",
+            "email" => "required|email|unique:users|max:100",
+            "password" => "required|min:6"
         ];
     }
 

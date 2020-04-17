@@ -14,7 +14,7 @@ class PostRequest extends RequestAbstract
     public function rules()
     {
         return [
-            "content" => "required",
+            "content" => "required|max:300",
         ];
     }
 
