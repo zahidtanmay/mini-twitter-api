@@ -24,7 +24,11 @@ class AuthController extends Controller
         }
 
         if (app('hash')->check($request->get('password'), $user->password)) {
-            return response()->json(['status' => 'success', 'token' => $this->jwt($user)], 200);
+            return response()->json([
+                'status' => 'success',
+                'token' => $this->jwt($user),
+                'user' => $user
+            ], 200);
         }
         throw new AuthException('Password is incorrect.');
     }
