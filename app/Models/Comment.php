@@ -16,11 +16,13 @@ class Comment extends Model
         'deleted_at'
     ];
 
-    public function post() {
+    public function post()
+    {
         return $this->belongsTo('App\Models\Post');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 

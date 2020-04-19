@@ -1,6 +1,6 @@
 <?php
-namespace App\Contracts;
 
+namespace App\Contracts;
 
 interface RepositoryInterface
 {
@@ -13,6 +13,8 @@ interface RepositoryInterface
     public function findOrFail($id, $columns = ['*']);
 
     public function findBy($field, $value, $columns = array('*'));
+
+    public function orderBy($column, $direction = 'asc');
 
     public function create(array $attributes);
 

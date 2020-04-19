@@ -23,16 +23,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password','deleted_at'
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany('App\Models\Post')->with('comments');
     }
 
-    public function following() {
+    public function following()
+    {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withPivot('id');
     }
 
 
-    public function followers() {
+    public function followers()
+    {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withPivot('id');
     }
 

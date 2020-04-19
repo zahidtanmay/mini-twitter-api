@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index()
     {
-        return $this->posts->with(['user', 'comments'])->paginate(10);
+        return $this->posts->with(['user', 'comments'])->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function show($id)
