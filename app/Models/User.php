@@ -25,14 +25,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post')->with('comments');
+        return $this->hasMany('App\Models\Post')->with(['user', 'comments']);
     }
 
     public function following()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withPivot('id');
     }
-
 
     public function followers()
     {

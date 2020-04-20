@@ -13,7 +13,7 @@ class CommentRequest extends RequestAbstract
     public function rules()
     {
         return [
-            "content" => "required|max:200",
+            "content" => "required|max:200|min:1",
         ];
     }
 

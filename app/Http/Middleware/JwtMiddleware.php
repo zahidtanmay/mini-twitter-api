@@ -21,9 +21,10 @@ class JwtMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         $token = $request->get('token', $request->bearerToken());
-
+        $requestedRoute = $request->route()[1]['uses'];
+        $exceptRoute = ["App\Http\Controllers\UserController@show", "App\Http\Controllers\PostController@index"];
         if(!$token) {
-            if ($request->getMethod() === "GET" && $request->getPathInfo() === "/api/posts") {
+            if ($request->getMethod() === "GET" && in_array($requestedRoute, $exceptRoute)) {
                 $request['auth'] = false;
                 return $next($request);
             } else {

@@ -30,6 +30,7 @@ $router->group(['prefix' => 'api'], function () use ($router){
 
         $router->group(['prefix' => '/posts'], function () use ($router) {
             $router->get('/', 'PostController@index');
+            $router->get('/trending', 'UserController@posts');
             $router->post('/', 'PostController@store');
             $router->get('/{id}', 'PostController@show');
             $router->post('/{id}/comments', 'CommentController@store');

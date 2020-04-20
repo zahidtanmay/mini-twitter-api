@@ -57,7 +57,6 @@ abstract class Repository implements RepositoryInterface {
     public function with(array $relations)
     {
         return $this->model->with($relations);
-
     }
 
     public function findBy($attribute, $value, $columns = array('*'))

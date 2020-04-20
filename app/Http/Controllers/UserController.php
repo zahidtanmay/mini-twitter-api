@@ -22,4 +22,17 @@ class UserController extends Controller
         $this->user->create($request->all());
         return response()->json(['status' => 'success', 'message' => 'User Created Successfully'], 201);
     }
+
+    public function posts()
+    {
+        $posts = [];
+        $user = app('request')->get('auth')->id;
+        $this->user->with(['followers.posts' => function ($q) use (&$posts){
+            array_push($posts, $q->get());
+        }, 'following.posts' => function ($q) use (&$posts){
+            array_push($posts, $q->get());
+        }])->find($user);
+
+        return $posts;
+    }
 }
