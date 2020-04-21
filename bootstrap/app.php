@@ -59,6 +59,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('acl');
+$app->configure('database');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -96,6 +97,7 @@ $app->configure('acl');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(Pearl\RequestValidate\RequestServiceProvider::class);
 /*
 |--------------------------------------------------------------------------

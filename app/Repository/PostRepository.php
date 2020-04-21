@@ -10,7 +10,12 @@ class PostRepository extends Repository
 
     public function create(array $data)
     {
-        $data['user_id'] = app('request')->get('auth')->id;
+        $userId = app('request')->get('auth')->id;
+        $data['user_id'] = $userId;
+        $key = 'userDetails'.$userId;
+        if(app('redis')->exists($key)){
+            app('redis')->del($key);
+        }
         return parent::create($data);
     }
 }

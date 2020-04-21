@@ -7,8 +7,10 @@
     "require": {
         "php": "^7.2",
         "firebase/php-jwt": "^5.2",
+        "illuminate/redis": "6.*",
         "laravel/lumen-framework": "^6.0",
-        "pearl/lumen-request-validate": "^1.4"
+        "pearl/lumen-request-validate": "^1.4",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

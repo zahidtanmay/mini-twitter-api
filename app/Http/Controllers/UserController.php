@@ -14,7 +14,13 @@ class UserController extends Controller
     }
 
     public function show($id){
-        return $this->user->with(['posts', 'followers', 'following'])->find($id);
+        $key = 'userDetails'.$id;
+        if (app('redis')->exists($key)){
+            return app('redis')->get($key);
+        }
+        $userDetails = $this->user->with(['posts', 'followers', 'following'])->find($id);
+        app('redis')->set($key, json_encode($userDetails));
+        return $userDetails;
     }
 
     public function store(UserCreateRequest $request)
